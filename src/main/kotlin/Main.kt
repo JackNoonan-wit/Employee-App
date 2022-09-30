@@ -19,11 +19,6 @@ val cycleToWorkMonthlyDeduction = 54.33
 
 
 fun main(args: Array<String>) {
-    println("Payslip Printer")
-    println(getFullName())
-    payslip()
-    println("\n")
-    payslipRounded()
     getFullName()
 
     println("Monthly Salary: ${getMonthlySalary()}")
@@ -32,36 +27,8 @@ fun main(args: Array<String>) {
     println("Monthly Total Deductions: ${getMonthlyDeductions()}")
     println("Monthly Pay: ${getMonthlyPay()}")
     println("Monthly Net Salary: ${getNetMonthlyPay()}")
+    println(getPayslip())
 }
-
-fun payslip() {
-
-    val monthlySalary = (grossSalary/12)
-    val monthlyPrsi = monthlySalary * (prsiPercentage / 100)
-    val grossPay = (monthlySalary + (annualBonus/12))
-    val monthlyPaye = monthlySalary * (payePercentage / 100)
-    val totalDeductions = (monthlyPrsi + monthlyPrsi + cycleToWorkMonthlyDeduction)
-
-    println ("""_________________________________________________________________________
-|                          Monthly Payslip                              |
-|_______________________________________________________________________|
-|                                                                       |
-|   Employee Name:  ${firstName.uppercase()} ${surname.uppercase()}(${gender.uppercase()})                    Employee ID: $employeeID    |
-|                                                                       |
-|_______________________________________________________________________|
-|                                                                       |
-|    PAYMENT DETAILS \t\t\t\t DEDUCTION DETAILS  \t\t\t\t|
-|_______________________________________________________________________|
-|    Salary: $monthlySalary\t\t PAYE: $monthlyPaye\t\t\t|
-|    Bonus:  ${annualBonus / 12}\t\t\t\t PRSI: $monthlyPrsi\t\t\t|
-|    \t\t\t\t\t\t\t\t Cycle To Work: $cycleToWorkMonthlyDeduction\t\t\t\t|
-|_______________________________________________________________________|
-|       Gross:  $grossPay \t\tTotal Deductions: $totalDeductions        |
-|_______________________________________________________________________|
-|   \t\t\t\t NET PAY:${grossPay - totalDeductions} \t\t\t\t\t\t\t|
-|_______________________________________________________________________|""")
-}
-
 
 
 fun getFullName() = when(gender){
@@ -76,15 +43,8 @@ fun getMonthlyPay()=roundTwoNumbers(getMonthlySalary() + (annualBonus / 12))
 fun getMonthlyDeductions()=roundTwoNumbers((getMonthlyPRSI() + getMonthlyPAYE() + cycleToWorkMonthlyDeduction))
 fun getNetMonthlyPay()=roundTwoNumbers(roundTwoNumbers(getMonthlyPay()-getMonthlyDeductions()))
 
-fun payslipRounded(){
+fun getPayslip()=
 
-    val monthlySalary = (grossSalary/12)
-    val monthlyPrsi = monthlySalary * (prsiPercentage / 100)
-    val monthlyPaye = monthlySalary * (payePercentage / 100)
-    val grossPay = (monthlySalary + (annualBonus/12))
-    val totalDeductions = (monthlyPrsi + monthlyPrsi + cycleToWorkMonthlyDeduction)
-
-    println (
 """
 _______________________________________________________________________
                           Monthly Payslip                              
@@ -105,8 +65,8 @@ _______________________________________________________________________
 _______________________________________________________________________
                 NET PAY:${getNetMonthlyPay()}
 _______________________________________________________________________
-""")
-}
+"""
+
 
 
 fun roundTwoNumbers(number: Double) = round(number * 100) / 100
