@@ -2,16 +2,8 @@ package ie.setu
 
 import kotlin.math.round
 
-val firstName = "Joe"
-val surname = "Soap"
-val gender = "M"
-val employeeID =6143
-val grossSalary = 67543.21
-val payePercentage = 38.5
-val prsiPercentage = 5.2
-val annualBonus = 1450.50
-val cycleToWorkMonthlyDeduction = 54.33
 
+var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 
 
 
@@ -37,6 +29,7 @@ fun main(args: Array<String>) {
         }
         println()
     } while (input != 1)
+
 }
 fun menu () : Int {
     print("""
@@ -53,16 +46,17 @@ fun menu () : Int {
        return readLine()!!.toInt()
 }
 
-fun getFullName() = when(gender){
-    "m", "M" ->"Mr. $firstName $surname"
-    "f", "F" ->"Ms. $firstName $surname"
-    else -> "$firstName $surname"
+
+fun getFullName() =when(employee.gender){
+    'm', 'M' ->"Mr. ${employee.firstName} ${employee.surname}"
+    'f','F' ->"Ms. ${employee.firstName} ${employee.surname}"
+    else -> "${employee.firstName} ${employee.surname}"
 }
-fun getMonthlySalary()=roundTwoNumbers(grossSalary/12)
-fun getMonthlyPRSI()=roundTwoNumbers(getMonthlySalary() * (prsiPercentage/100))
-fun getMonthlyPAYE()=roundTwoNumbers(getMonthlySalary() * (payePercentage/100))
-fun getMonthlyPay()=roundTwoNumbers(getMonthlySalary() + (annualBonus / 12))
-fun getMonthlyDeductions()=roundTwoNumbers((getMonthlyPRSI() + getMonthlyPAYE() + cycleToWorkMonthlyDeduction))
+fun getMonthlySalary()=roundTwoNumbers(employee.grossSalary/12)
+fun getMonthlyPRSI()=roundTwoNumbers(getMonthlySalary() * (employee.prsiPercentage/100))
+fun getMonthlyPAYE()=roundTwoNumbers(getMonthlySalary() * (employee.payePercentage/100))
+fun getMonthlyPay()=roundTwoNumbers(getMonthlySalary() + (employee.annualBonus / 12))
+fun getMonthlyDeductions()=roundTwoNumbers((getMonthlyPRSI() + getMonthlyPAYE() + employee.cycleToWorkMonthlyDeduction))
 fun getNetMonthlyPay()=roundTwoNumbers(roundTwoNumbers(getMonthlyPay()-getMonthlyDeductions()))
 
 fun getPayslip()=
@@ -71,17 +65,17 @@ fun getPayslip()=
 _______________________________________________________________________
                           Monthly Payslip                              
 _______________________________________________________________________                                                                      
-                Employee Name:  ${getFullName()} (${gender.uppercase()})
-                Employee ID: $employeeID                                                                       
+                Employee Name:  ${getFullName()} (${employee.gender.uppercase()})
+                Employee ID: $employee.employeeID                                                                       
 _______________________________________________________________________                                                               
                 PAYMENT DETAILS - Gross Pay: ${getMonthlyPay()} 
 _______________________________________________________________________
                 Salary: ${(getMonthlySalary())} 
-                Bonus:  ${roundTwoNumbers(annualBonus / 12)} 
+                Bonus:  ${roundTwoNumbers(employee.annualBonus / 12)} 
 _______________________________________________________________________
                 DEDUCTIONS - Total Deductions ${getMonthlyDeductions()}
                 
-                Cycle To Work: $cycleToWorkMonthlyDeduction
+                Cycle To Work: $employee.cycleToWorkMonthlyDeduction
                 PRSI: ${getMonthlyPRSI()}
                 PAYE: ${getMonthlyPAYE()}
 _______________________________________________________________________
