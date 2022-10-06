@@ -1,10 +1,14 @@
-package ie.setu
+package ie.setu.ie.setu
 
+import ie.setu.controllers.EmployeeAPI
+import ie.setu.models.Employee
 import mu.KotlinLogging
 import kotlin.math.round
 
+
 //var  =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 var employees = EmployeeAPI()
+
 
 val logger = KotlinLogging.logger {}
 

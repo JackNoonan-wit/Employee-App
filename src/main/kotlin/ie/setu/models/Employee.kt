@@ -1,4 +1,6 @@
-package ie.setu
+package ie.setu.models
+
+import ie.setu.ie.setu.roundTwoNumbers
 
 class Employee (
     var firstName: String, var surname: String, var gender: Char, var employeeID: Int,
