@@ -5,6 +5,29 @@ import ie.setu.models.Employee
 import mu.KotlinLogging
 import kotlin.math.round
 
+/*
+Ansi color escape codes sourced through here:
+https://www.codegrepper.com/code-examples/java/how+to+print+in+color+kotlin
+*/
+
+
+
+//backgrounds
+//val blackb = "\\033[0;100m"
+val blackb = "\u001b[40m"
+
+
+// colours
+val white = "\u001b[97m"
+val yellow = "\u001b[93m"
+val blue = "\u001b[94m"
+val reset = "\u001b[0m"
+
+//colors underlined
+val whiteu = "\u001b[4;97m"
+val yellowu = "\u001b[4;93m"
+val blueu = "\u001b[1;4;94m"
+val resetu = "\u001b[4;0m"
 
 //var  =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 var employees = EmployeeAPI()
@@ -40,22 +63,30 @@ fun add(){
     employees.create(Employee(firstName, surname, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction))
 }
 
+/*fun delete(){
+    print("Enter ID: ")
+    val employeeID = readLine().toString()
+
+    employees.delete(Employee(employeeID))
+}*/
+
 fun main(args: Array<String>){
     start()
 }
 
 
 fun menu () : Int {
-    logger.info { "Launching Employee App" }
-    print("""
-         |Employee Menu
-         |   1. Add Employee
-         |   2. List All Employees
-         |   3. Search Employees
-         |   4. Print Payslip for Employee
-         |  -1. Exit
-         |
-         |Enter Option : """.trimMargin())
+    logger.info { blue +"Launching Employee App"+ reset }
+    print(yellow+"""
+|   Employee Menu
+     |"""+blue+"""   1. """+whiteu+"""Add Employee"""+reset+yellow+"""
+     |"""+blue+"""   2. """+whiteu+"""List All Employees"""+reset+yellow+"""
+     |"""+blue+"""   3. """+whiteu+"""Search Employees"""+reset+yellow+"""
+     |"""+blue+"""   4. """+whiteu+"""Print Payslip for Employee"""+reset+yellow+"""
+     |"""+blue+"""   5. """+whiteu+"""Delete Employee"""+reset+yellow+"""
+     |"""+blue+"""  -1. """+whiteu+"""Exit"""+reset+yellow+"""
+     |
+|   Enter Option : """.trimMargin())
     return readLine()!!.toInt()
 }
 
@@ -89,6 +120,7 @@ fun search() {
     else
         println(employee)
 }
+
 
 internal fun getEmployeeById(): Employee? {
     print("Enter the employee id to search by: ")

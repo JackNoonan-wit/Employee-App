@@ -1,6 +1,6 @@
 package ie.setu.models
 
-import ie.setu.ie.setu.roundTwoNumbers
+import ie.setu.ie.setu.*
 
 class Employee (
     var firstName: String, var surname: String, var gender: Char, var employeeID: Int,
@@ -26,26 +26,26 @@ class Employee (
 
     fun getPayslip() =
 
-        """
+       yellow+ """
 _______________________________________________________________________
-                          Monthly Payslip                              
+                          """+blueu+"""Monthly Payslip"""+reset+yellow+"""                              
 _______________________________________________________________________                                                                      
-                Employee Name:  ${getFullName()} (${gender.uppercase()})
-                Employee ID: $employeeID                                                                       
+                """+blueu+"""Employee Name:"""+reset+white+"""  ${getFullName()} (${gender.uppercase()})
+                """+blueu+"""Employee ID:"""+reset+white+""" $employeeID  """+yellow+"""                                                                     
 _______________________________________________________________________                                                               
-                PAYMENT DETAILS - Gross Pay: ${getMonthlyPay()} 
+                """+blueu+"""PAYMENT DETAILS - Gross Pay:"""+reset+white+""" ${getMonthlyPay()} """+yellow+"""
 _______________________________________________________________________
-                Salary: ${(getMonthlySalary())} 
-                Bonus:  ${roundTwoNumbers(annualBonus / 12)} 
+                """+blueu+"""Salary:"""+reset+white+""" ${(getMonthlySalary())} 
+                """+blueu+"""Bonus:"""+reset+white+"""  ${roundTwoNumbers(annualBonus / 12)} """+yellow+"""
 _______________________________________________________________________
-                DEDUCTIONS - Total Deductions ${getMonthlyDeductions()}
+                """+blueu+"""DEDUCTIONS - Total Deductions:"""+reset+white+""" ${getMonthlyDeductions()}
                 
-                Cycle To Work: $cycleToWorkMonthlyDeduction
-                PRSI: ${getMonthlyPRSI()}
-                PAYE: ${getMonthlyPAYE()}
+                """+blueu+"""Cycle To Work:"""+reset+white+""" $cycleToWorkMonthlyDeduction
+                """+blueu+"""PRSI:"""+reset+white+""" ${getMonthlyPRSI()}
+                """+blueu+"""PAYE:"""+reset+white+""" ${getMonthlyPAYE()}"""+yellow+"""
 _______________________________________________________________________
-                NET PAY:${getNetMonthlyPay()}
-_______________________________________________________________________
+                """+blueu+"""NET PAY:${getNetMonthlyPay()}"""+reset+yellow+"""
+_______________________________________________________________________"""+reset+"""
 """
 
     override fun toString(): String {
