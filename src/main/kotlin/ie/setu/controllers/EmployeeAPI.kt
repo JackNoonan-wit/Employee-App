@@ -24,8 +24,10 @@ class EmployeeAPI {
         employee.employeeID = getId()
         employees.add(employee)
     }
-    fun delete(employee: Employee) {
-        employee.employeeID = getId()
-        employees.remove(employee)
+    fun delete() {
+        employees.clear()
+    }
+    fun pop() {
+        employees.removeLast()
     }
 }

@@ -63,12 +63,7 @@ fun add(){
     employees.create(Employee(firstName, surname, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction))
 }
 
-/*fun delete(){
-    print("Enter ID: ")
-    val employeeID = readLine().toString()
 
-    employees.delete(Employee(employeeID))
-}*/
 
 fun main(args: Array<String>){
     start()
@@ -83,7 +78,8 @@ fun menu () : Int {
      |"""+blue+"""   2. """+whiteu+"""List All Employees"""+reset+yellow+"""
      |"""+blue+"""   3. """+whiteu+"""Search Employees"""+reset+yellow+"""
      |"""+blue+"""   4. """+whiteu+"""Print Payslip for Employee"""+reset+yellow+"""
-     |"""+blue+"""   5. """+whiteu+"""Delete Employee"""+reset+yellow+"""
+     |"""+blue+"""   5. """+whiteu+"""Delete All Employee"""+reset+yellow+"""
+     |"""+blue+"""   6. """+whiteu+"""Delete Most Recent Employee"""+reset+yellow+"""
      |"""+blue+"""  -1. """+whiteu+"""Exit"""+reset+yellow+"""
      |
 |   Enter Option : """.trimMargin())
@@ -100,12 +96,22 @@ fun start() {
             2 -> list()
             3 -> search()
             4 -> paySlip()
+            5-> delete()
+            6-> pop()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
         }
         println()
     } while (input != -1)
+}
+
+fun delete() {
+employees.delete()
+}
+
+fun pop() {
+    employees.pop()
 }
 
 fun list(){
