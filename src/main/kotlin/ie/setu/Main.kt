@@ -76,10 +76,12 @@ fun menu () : Int {
 |   Employee Menu
      |"""+blue+"""   1. """+whiteu+"""Add Employee"""+reset+yellow+"""
      |"""+blue+"""   2. """+whiteu+"""List All Employees"""+reset+yellow+"""
+     |"""+blue+"""   3. """+whiteu+"""List Alphabetically"""+reset+yellow+"""
      |"""+blue+"""   3. """+whiteu+"""Search Employees"""+reset+yellow+"""
-     |"""+blue+"""   4. """+whiteu+"""Print Payslip for Employee"""+reset+yellow+"""
-     |"""+blue+"""   5. """+whiteu+"""Delete All Employee"""+reset+yellow+"""
-     |"""+blue+"""   6. """+whiteu+"""Delete Most Recent Employee"""+reset+yellow+"""
+     |"""+blue+"""   4. """+whiteu+"""Search By Name"""+reset+yellow+"""
+     |"""+blue+"""   5. """+whiteu+"""Print Payslip for Employee"""+reset+yellow+"""
+     |"""+blue+"""   6. """+whiteu+"""Delete All Employee"""+reset+yellow+"""
+     |"""+blue+"""   7. """+whiteu+"""Delete Most Recent Employee"""+reset+yellow+"""
      |"""+blue+"""  -1. """+whiteu+"""Exit"""+reset+yellow+"""
      |
 |   Enter Option : """.trimMargin())
@@ -94,10 +96,12 @@ fun start() {
         when (input) {
             1 -> add()
             2 -> list()
-            3 -> search()
-            4 -> paySlip()
-            5-> delete()
-            6-> pop()
+            3 -> listAlpha()
+            4 -> search()
+            5 -> searchName()
+            6 -> paySlip()
+            7 -> delete()
+            8 -> pop()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -119,6 +123,11 @@ fun list(){
     .forEach{ println(it) }
 }
 
+fun listAlpha(){
+    employees.findAllAlpha()
+
+}
+
 fun search() {
     val employee = getEmployeeById()
     if (employee == null)
@@ -127,12 +136,26 @@ fun search() {
         println(employee)
 }
 
+fun searchName() {
+    val employee = getEmployeeByName()
+    if (employee == null)
+        println("No employee found")
+    else
+        println(employee)
+}
 
 internal fun getEmployeeById(): Employee? {
     print("Enter the employee id to search by: ")
     val employeeID = readLine()!!.toInt()
     return employees.findOne(employeeID)
 }
+
+internal fun getEmployeeByName(): Employee? {
+    print("Enter the employee's first name to search by: ")
+    val firstName = readLine()!!.toString()
+    return employees.findByName(firstName)
+}
+
 fun paySlip(){
     val employee = getEmployeeById()
     if (employee != null)

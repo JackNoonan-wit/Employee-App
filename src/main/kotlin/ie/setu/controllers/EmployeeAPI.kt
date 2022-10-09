@@ -16,8 +16,26 @@ class EmployeeAPI {
         return employees
     }
 
+    fun findAllAlpha() {
+        /*for (employee in employees)
+            println(employee)
+
+        for ((index, value) in employees.withIndex())
+            println("$index: $value") */
+
+        //employees.forEach  {println(it)}
+        employees
+            .sortedBy {it.firstName}
+            .forEach{ println(it) }
+
+    }
+
     fun findOne(id: Int): Employee? {
         return employees.find { p -> p.employeeID == id }
+    }
+
+    fun findByName(name: String): Employee? {
+        return employees.find { p -> p.firstName == name }
     }
 
     fun create(employee: Employee) {
