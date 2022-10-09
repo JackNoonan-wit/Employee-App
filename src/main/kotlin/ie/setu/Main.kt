@@ -111,10 +111,10 @@ fun menu () : Int {
      |"""+blue+"""   1. """+whiteu+"""Add Employee"""+reset+yellow+"""
      |"""+blue+"""   2. """+whiteu+"""List All Employees"""+reset+yellow+"""
      |"""+blue+"""   3. """+whiteu+"""Search Employees"""+reset+yellow+"""
-     |"""+blue+"""   4. """+whiteu+"""Search By Name"""+reset+yellow+"""
-     |"""+blue+"""   5. """+whiteu+"""Print Payslip for Employee"""+reset+yellow+"""
-     |"""+blue+"""   6. """+whiteu+"""Delete All Employee"""+reset+yellow+"""
-     |"""+blue+"""   7. """+whiteu+"""Delete Most Recent Employee"""+reset+yellow+"""
+     |"""+blue+"""   4. """+whiteu+"""Print Payslip for Employee"""+reset+yellow+"""
+     |"""+blue+"""   5. """+whiteu+"""Delete All Employee"""+reset+yellow+"""
+     |"""+blue+"""   6. """+whiteu+"""Delete Most Recent Employee"""+reset+yellow+"""
+     |"""+blue+"""   7. """+whiteu+"""Load in Dummy Employee Data"""+reset+yellow+"""
      |"""+blue+"""  -1. """+whiteu+"""Exit"""+reset+yellow+"""
      |
 |   Enter Option : """.trimMargin())
@@ -130,10 +130,10 @@ fun start() {
             1 -> add()
             2 -> chooseList()
             3 -> chooseSearch()
-            4 -> searchName()
-            5 -> paySlip()
-            6 -> delete()
-            7 -> confirmPop()
+            4 -> paySlip()
+            5 -> delete()
+            6 -> confirmPop()
+            7 -> dummyData()
             //9 -> update()
            //9 -> pop()
             -99 -> dummyData()
@@ -144,39 +144,18 @@ fun start() {
     } while (input != -1)
 }
 
+
+
+// Functions used by the Menu
+
+
+
+//deletes entire employee array
 fun delete() {
 employees.delete()
 }
 
-
-/*fun confirmPop() {
-
-    println("""Are you sure you want to delete the current Database?
-                y = yes
-                n = no
-    """)
-
-
-    //return readLine()!!.toInt()
-
-}
-*/
-
-/*internal fun getEmployeeById(): Employee? {
-    print("Enter the employee id to search by: ")
-    val employeeID = readLine()!!.toInt()
-    return employees.findOne(employeeID)
-}
-*/
-/*fun search() {
-    val employee = getEmployeeById()
-    if (employee == null)
-        println("No employee found")
-    else
-        println(employee)
-}
- */
-
+//Displays a confirmation screen for the Pop command
 internal fun confirmPop() {
     print("Are you sure you want to delete the current Database? "+green+"1  "+reset+"/"+red+"  2"+reset)
     val answer = readLine()!!.toInt()
@@ -186,6 +165,7 @@ internal fun confirmPop() {
     }
 }
 
+//Displays a Selection screen to choose a normal display or for it to be displayed in alphabetical order
 internal fun chooseList() {
     print("Display database chronologically or sort alphabetically? "+green+"Normal  "+reset+"/"+red+"  Alphabetically"+reset)
 
@@ -201,21 +181,8 @@ internal fun chooseList() {
     }
 }
 
-fun pop() {
-    val answer = confirmPop()
-    employees.pop()
-}
 
-fun list(){
-    employees.findAll()
-    .forEach{ println(it) }
-}
-
-fun listAlpha(){
-    employees.findAllAlpha()
-
-}
-
+//Displays a Selection screen to choose to find by ID or by Name
 internal fun chooseSearch() {
     print("Search by ID or Name?? "+green+"ID  "+reset+"/"+red+"  Name"+reset)
 
@@ -229,6 +196,7 @@ internal fun chooseSearch() {
     }
 }
 
+//Searches array by ID
 fun search() {
     val employee = getEmployeeById()
     if (employee == null)
@@ -237,6 +205,7 @@ fun search() {
         println(employee)
 }
 
+//Searches array by Name
 fun searchName() {
     val employee = getEmployeeByName()
     if (employee == null)
@@ -244,6 +213,7 @@ fun searchName() {
     else
         println(employee)
 }
+
 
 internal fun getEmployeeById(): Employee? {
     print("Enter the employee id to search by: ")
@@ -257,24 +227,36 @@ internal fun getEmployeeByName(): Employee? {
     return employees.findByName(firstName)
 }
 
+//prints payslip
 fun paySlip(){
     val employee = getEmployeeById()
     if (employee != null)
         println(employee.getPayslip())
 }
 
+//inserts filler/dummy data into the array
 fun dummyData() {
     employees.create(Employee("Joe", "Soap", 'm', 0, 35655.43, 31.0, 7.5, 2000.0, 25.6))
     employees.create(Employee("Joan", "Murphy", 'f', 0, 54255.13, 32.5, 7.0, 1500.0, 55.3))
     employees.create(Employee("Mary", "Quinn", 'f', 0, 75685.41, 40.0, 8.5, 4500.0, 0.0))
+    employees.create(Employee("Sean", "Stevens", 'm', 0, 31875.43, 40.0, 6.5, 1400.0, 22.2))
+    employees.create(Employee("Chris", "Connors", 'm', 0, 512736.13, 37.5, 8.0, 1200.0, 50.3))
+    employees.create(Employee("Mark", "Millers", 'm', 0, 34585.41, 34.0, 7.5, 3000.0, 10.0))
+}
+fun pop() {
+    val answer = confirmPop()
+    employees.pop()
 }
 
+fun list(){
+    employees.findAll()
+        .forEach{ println(it) }
+}
 
+fun listAlpha(){
+    employees.findAllAlpha()
 
-
-
-
-
+}
 
 /*fun main(args: Array<String>) {
 
@@ -314,16 +296,6 @@ fun menu () : Int {
        return readLine()!!.toInt()
 }
 */
-
-
-
-
-
-
-
-
-
-
 
 
 fun roundTwoNumbers(number: Double) = round(number * 100) / 100

@@ -16,6 +16,7 @@ class EmployeeAPI {
         return employees
     }
 
+    //sorts employees in alphabetical order
     fun findAllAlpha() {
         /*for (employee in employees)
             println(employee)
@@ -47,9 +48,12 @@ class EmployeeAPI {
         employees.remove(employee)
         employees.add(employee)
     }*/
+
+    //deletes entire array
     fun delete() {
         employees.clear()
     }
+    //deletes most recent addition to the array
     fun pop() {
         employees.removeLast()
     }
