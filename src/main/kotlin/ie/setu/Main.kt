@@ -21,6 +21,8 @@ val blackb = "\u001b[40m"
 val white = "\u001b[97m"
 val yellow = "\u001b[93m"
 val blue = "\u001b[94m"
+val green = "\u001b[92m"
+val red = "\u001b[91m"
 val reset = "\u001b[0m"
 
 //colors underlined
@@ -77,11 +79,11 @@ fun menu () : Int {
      |"""+blue+"""   1. """+whiteu+"""Add Employee"""+reset+yellow+"""
      |"""+blue+"""   2. """+whiteu+"""List All Employees"""+reset+yellow+"""
      |"""+blue+"""   3. """+whiteu+"""List Alphabetically"""+reset+yellow+"""
-     |"""+blue+"""   3. """+whiteu+"""Search Employees"""+reset+yellow+"""
-     |"""+blue+"""   4. """+whiteu+"""Search By Name"""+reset+yellow+"""
-     |"""+blue+"""   5. """+whiteu+"""Print Payslip for Employee"""+reset+yellow+"""
-     |"""+blue+"""   6. """+whiteu+"""Delete All Employee"""+reset+yellow+"""
-     |"""+blue+"""   7. """+whiteu+"""Delete Most Recent Employee"""+reset+yellow+"""
+     |"""+blue+"""   4. """+whiteu+"""Search Employees"""+reset+yellow+"""
+     |"""+blue+"""   5. """+whiteu+"""Search By Name"""+reset+yellow+"""
+     |"""+blue+"""   6. """+whiteu+"""Print Payslip for Employee"""+reset+yellow+"""
+     |"""+blue+"""   7. """+whiteu+"""Delete All Employee"""+reset+yellow+"""
+     |"""+blue+"""   8. """+whiteu+"""Delete Most Recent Employee"""+reset+yellow+"""
      |"""+blue+"""  -1. """+whiteu+"""Exit"""+reset+yellow+"""
      |
 |   Enter Option : """.trimMargin())
@@ -101,7 +103,8 @@ fun start() {
             5 -> searchName()
             6 -> paySlip()
             7 -> delete()
-            8 -> pop()
+            8 -> confirmPop()
+           // 9 -> pop()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -114,7 +117,45 @@ fun delete() {
 employees.delete()
 }
 
+
+/*fun confirmPop() {
+
+    println("""Are you sure you want to delete the current Database?
+                y = yes
+                n = no
+    """)
+
+
+    //return readLine()!!.toInt()
+
+}
+*/
+
+/*internal fun getEmployeeById(): Employee? {
+    print("Enter the employee id to search by: ")
+    val employeeID = readLine()!!.toInt()
+    return employees.findOne(employeeID)
+}
+*/
+/*fun search() {
+    val employee = getEmployeeById()
+    if (employee == null)
+        println("No employee found")
+    else
+        println(employee)
+}
+ */
+
+internal fun confirmPop() {
+    print("Are you sure you want to delete the current Database? "+green+"1  "+reset+"/"+red+"  2"+reset)
+    val answer = readLine()!!.toInt()
+    if (answer == 1) {
+        println("Database deleted")
+        return employees.pop()
+    }
+}
 fun pop() {
+    val answer = confirmPop()
     employees.pop()
 }
 
