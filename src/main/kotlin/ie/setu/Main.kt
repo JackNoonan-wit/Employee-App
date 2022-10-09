@@ -64,7 +64,39 @@ fun add(){
 
     employees.create(Employee(firstName, surname, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction))
 }
+/*fun update(){
+    val employee = getEmployeeById()
+    if (employee == null)
+        println("No employee found")
+    else
+        return employees.update(update)
 
+    print("Enter first name: ")
+    val firstName = readLine().toString()
+
+    print("Enter surname: ")
+    val surname = readLine().toString()
+
+    print("Enter gender (m/f): ")
+    val gender = readLine()!!.toCharArray()[0]
+
+    print("Enter gross salary: ")
+    val grossSalary = readLine()!!.toDouble()
+
+    print("Enter PAYE %: ")
+    val payePercentage = readLine()!!.toDouble()
+
+    print("Enter PRSI %: ")
+    val prsiPercentage = readLine()!!.toDouble()
+
+    print("Enter Annual Bonus: ")
+    val annualBonus= readLine()!!.toDouble()
+
+    print("Enter Cycle to Work Deduction: ")
+    val cycleToWorkMonthlyDeduction= readLine()!!.toDouble()
+
+    employees.update(Employee(firstName, surname, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, cycleToWorkMonthlyDeduction))
+}*/
 
 
 fun main(args: Array<String>){
@@ -78,12 +110,11 @@ fun menu () : Int {
 |   Employee Menu
      |"""+blue+"""   1. """+whiteu+"""Add Employee"""+reset+yellow+"""
      |"""+blue+"""   2. """+whiteu+"""List All Employees"""+reset+yellow+"""
-     |"""+blue+"""   3. """+whiteu+"""List Alphabetically"""+reset+yellow+"""
-     |"""+blue+"""   4. """+whiteu+"""Search Employees"""+reset+yellow+"""
-     |"""+blue+"""   5. """+whiteu+"""Search By Name"""+reset+yellow+"""
-     |"""+blue+"""   6. """+whiteu+"""Print Payslip for Employee"""+reset+yellow+"""
-     |"""+blue+"""   7. """+whiteu+"""Delete All Employee"""+reset+yellow+"""
-     |"""+blue+"""   8. """+whiteu+"""Delete Most Recent Employee"""+reset+yellow+"""
+     |"""+blue+"""   3. """+whiteu+"""Search Employees"""+reset+yellow+"""
+     |"""+blue+"""   4. """+whiteu+"""Search By Name"""+reset+yellow+"""
+     |"""+blue+"""   5. """+whiteu+"""Print Payslip for Employee"""+reset+yellow+"""
+     |"""+blue+"""   6. """+whiteu+"""Delete All Employee"""+reset+yellow+"""
+     |"""+blue+"""   7. """+whiteu+"""Delete Most Recent Employee"""+reset+yellow+"""
      |"""+blue+"""  -1. """+whiteu+"""Exit"""+reset+yellow+"""
      |
 |   Enter Option : """.trimMargin())
@@ -97,14 +128,14 @@ fun start() {
         input = menu()
         when (input) {
             1 -> add()
-            2 -> list()
-            3 -> listAlpha()
-            4 -> search()
-            5 -> searchName()
-            6 -> paySlip()
-            7 -> delete()
-            8 -> confirmPop()
-           // 9 -> pop()
+            2 -> chooseList()
+            3 -> chooseSearch()
+            4 -> searchName()
+            5 -> paySlip()
+            6 -> delete()
+            7 -> confirmPop()
+            //9 -> update()
+           //9 -> pop()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -154,6 +185,22 @@ internal fun confirmPop() {
         return employees.pop()
     }
 }
+
+internal fun chooseList() {
+    print("Display database chronologically or sort alphabetically? "+green+"Normal  "+reset+"/"+red+"  Alphabetically"+reset)
+
+    val answer = readLine()!!.toString()
+
+    if (answer == "Alphabetically") {
+        println("Database displayed")
+        return employees.findAllAlpha()
+    }
+    else {
+       return employees.findAll()
+           .forEach{ println(it) }
+    }
+}
+
 fun pop() {
     val answer = confirmPop()
     employees.pop()
@@ -167,6 +214,19 @@ fun list(){
 fun listAlpha(){
     employees.findAllAlpha()
 
+}
+
+internal fun chooseSearch() {
+    print("Search by ID or Name?? "+green+"ID  "+reset+"/"+red+"  Name"+reset)
+
+    val answer = readLine()!!.toString()
+
+    if (answer == "Name") {
+        return searchName()
+    }
+    else {
+        return search()
+    }
 }
 
 fun search() {

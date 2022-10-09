@@ -42,6 +42,11 @@ class EmployeeAPI {
         employee.employeeID = getId()
         employees.add(employee)
     }
+    /*fun update(employee: Employee) {
+        employee.employeeID = getId()
+        employees.remove(employee)
+        employees.add(employee)
+    }*/
     fun delete() {
         employees.clear()
     }
